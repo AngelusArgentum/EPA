@@ -1,2 +1,2 @@
-<h1 text-allign=center> EPA <h1/>
+<h1 align="center"> EPA <h1/>
 R-info practices.
