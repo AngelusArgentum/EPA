@@ -1,0 +1,33 @@
+programa C3_E7
+areas
+  ciudad:AreaC (1,1,100,100)
+robots
+  robot kftr5
+  variables
+    esq:numero
+    papeles:numero
+  comenzar
+    derecha
+    esq:=0
+    papeles:=0
+    repetir 99
+      mientras HayPapelEnLaEsquina
+        tomarPapel
+        papeles:=papeles+1    
+      si papeles=6
+        esq:=esq+1
+      papeles:=0
+      mover
+    mientras HayPapelEnLaEsquina
+      tomarPapel
+      papeles:=papeles+1
+    si papeles=6
+      esq:=esq+1
+    Informar (esq)
+  fin
+variables
+  R-info:kftr5
+comenzar
+  AsignarArea(R-info,ciudad)
+  Iniciar(R-info,1,34)
+fin

@@ -1,0 +1,29 @@
+{recorrer calle 2 - parar al encontrar 10P & 4F - existen - no caerse}
+programa C3_E9
+areas
+  ciudad:AreaC(1,1,10,10)
+robots
+  robot kftr5
+  variables
+    flores:numero
+    papeles:numero
+  comenzar
+    flores:=0
+    papeles:=0
+    derecha
+    mientras (papeles<10) | (flores<4)
+      mientras (HayPapelEnLaEsquina) & (papeles<10)
+        tomarPapel
+        papeles:=papeles+1
+      mientras (HayFlorEnLaEsquina) & (flores<4)
+        tomarFlor
+        flores:=flores+1
+      si (papeles<10) | (flores<4)
+        mover
+  fin
+variables
+  R-info:kftr5
+comenzar
+  AsignarArea(R-info,ciudad)
+  Iniciar(R-info,1,2)
+fin
