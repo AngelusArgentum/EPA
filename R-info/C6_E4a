@@ -1,0 +1,35 @@
+programa C6_E4a
+procesos
+  proceso rectangulo (E alto:numero; E base:numero)
+  comenzar
+    repetir (2)
+      repetir (alto)
+        mover
+      derecha
+      repetir (base)
+        mover
+      derecha
+  fin
+areas
+  ciudad:AreaC(1,1,100,100)
+robots
+  robot tuki
+  variables
+    alto, base:numero
+  comenzar
+    alto:=1
+    base:=5
+    repetir (2)
+      rectangulo (alto, base)
+      Pos(PosAv+1,PosCa+2)
+      base:=base - 2
+    rectangulo (alto, base)
+  fin
+variables
+  R-info: tuki
+comenzar
+  AsignarArea(R-info,ciudad)
+  Iniciar(R-info,1,1)
+fin
+        
+  
