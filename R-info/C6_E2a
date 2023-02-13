@@ -1,0 +1,27 @@
+programa E2_C6
+procesos
+  proceso cuadrado (E lado:numero)
+  comenzar
+    repetir 4
+      repetir (lado)
+        mover
+      derecha
+  fin
+areas
+  ciudad:AreaC(1,1,100,100)
+robots
+  robot tuki
+  variables
+    pasos:numero
+  comenzar
+    pasos:=1
+    repetir (4)
+      cuadrado (pasos)
+      pasos:=pasos+1
+  fin
+variables
+  R-info:tuki
+comenzar
+  AsignarArea(R-info,ciudad)
+  Iniciar(R-info,1,1)
+fin
