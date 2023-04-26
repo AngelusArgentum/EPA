@@ -1,0 +1,61 @@
+{Recorrer AV8 - Juntar todas las flores y los papeles - Parar si hay esquina vacia - Luego de eso posicionarse en 1,1 y hacer rectangulo de altura=flores y ancho=papeles}
+programa Adicional_Dos
+procesos
+  proceso JuntarFlores (ES flores:numero)
+  comenzar
+    mientras (HayFlorEnLaEsquina)
+      tomarFlor
+      flores:=flores+1
+  fin
+  proceso JuntarPapeles (ES papeles:numero)
+  comenzar
+    mientras (HayPapelEnLaEsquina)
+      tomarPapel
+      papeles:=papeles+1
+  fin
+  proceso RevEsq (ES vacia:boolean)
+  comenzar
+    si ~(HayPapelEnLaEsquina) & ~(HayFlorEnLaEsquina)
+      vacia:=V
+  fin
+  proceso Avenida_N8 (ES flores:numero;ES papeles:numero;ES vacia:boolean)
+  comenzar
+    Pos (8,1)
+    RevEsq(vacia)
+    mientras(vacia=F)
+      JuntarFlores(flores)
+      JuntarPapeles(papeles)
+      mover
+      RevEsq(vacia)
+  fin
+  proceso Rectangulo (E flores:numero;E papeles:numero)
+  comenzar
+    Pos(1,1)
+    repetir (2)
+      repetir(flores)
+        mover
+      derecha
+      repetir(papeles)
+        mover
+      derecha
+  fin
+areas
+  ciudad:AreaC(1,1,100,100)
+robots
+  robot tuki
+  variables
+    flores,papeles:numero
+    vacia:boolean
+  comenzar
+    flores:=0
+    papeles:=0
+    vacia:=F
+    Avenida_N8 (flores,papeles,vacia)
+    Rectangulo(flores,papeles)
+  fin
+variables
+  R-info:tuki
+comenzar
+  AsignarArea(R-info,ciudad)
+  Iniciar(R-info,1,1)
+fin

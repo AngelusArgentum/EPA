@@ -1,0 +1,69 @@
+{recorrer 10 calles - juntar todas las flores y papeles - informar EsqAmount donde flores=papeles+papeles - al final del recorrido informar total de papeles y flores - recorrer 8 esquinas e ir incrementando de a 2}
+programa Ej_adicional_5
+procesos
+  proceso JuntarF (ES flores:numero;ES floresT:numero)
+  comenzar
+    mientras (HayFlorEnLaEsquina)
+      tomarFlor
+      flores:=flores+1
+    floresT:=floresT+flores
+  fin
+  proceso JuntarP (ES papeles:numero;ES papelesT:numero)
+  comenzar  
+    mientras (HayPapelEnLaEsquina)
+      tomarPapel
+      papeles:=papeles+1
+    papelesT:=papelesT+papeles
+  fin
+  proceso CompararFyP (ES flores:numero;ES papeles:numero; ES DobleFlores:numero)
+  comenzar
+    si (flores=papeles+papeles)
+      DobleFlores:=DobleFlores+1
+  fin
+  proceso Calle (ES flores:numero;ES floresT:numero;ES papeles:numero;ES papelesT:numero;ES DobleFlores:numero;ES StepAmount:numero)
+  comenzar
+    repetir (StepAmount)
+      JuntarF (flores,floresT)
+      JuntarP (papeles,papelesT)
+      CompararFyP(flores,papeles,DobleFlores)
+      mover
+      flores:=0
+      papeles:=0
+    JuntarF (flores,floresT)
+    JuntarP (papeles,papelesT)
+    CompararFyP (flores,papeles,DobleFlores)
+    papeles:=0
+    flores:=0
+    StepAmount:=StepAmount+2
+    Informar(DobleFlores)
+  fin
+  proceso Callex10 (ES flores:numero;ES floresT:numero;ES papeles:numero;ES papelesT:numero;ES DobleFlores:numero;E StepAmount:numero)
+  comenzar
+    repetir (9)
+      Calle (flores,floresT,papeles,papelesT,DobleFlores,StepAmount)
+    Calle (flores,floresT,papeles,papelesT,DobleFlores,StepAmount)
+  fin
+areas
+  ciudad:AreaC(1,1,100,100)
+robots
+  robot tuki
+  variables
+    flores,floresT,papeles,papelesT,DobleFlores,StepAmount:numero
+  comenzar
+    Pos(1,1)
+    flores:=0
+    floresT:=0
+    papeles:=0
+    papelesT:=0
+    DobleFlores:=0
+    StepAmount:=8
+    derecha
+    Callex10 (flores,floresT,papeles,papelesT,DobleFlores,StepAmount)
+    Informar(papelesT,floresT)
+  fin
+variables
+  R-info: tuki
+comenzar
+  AsignarArea(R-info,ciudad)
+  Iniciar(R-info,1,1)
+fin

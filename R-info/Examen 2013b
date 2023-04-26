@@ -1,0 +1,80 @@
+{Recorrer calles impares - parar al juntar 10 flores - Recorrer AVs 10,11 y 12 juntando papeles - Informar TOTALPapeles}
+programa Examen2013b
+procesos
+  proceso JuntarF (ES flores:numero)
+  comenzar
+    mientras (HayFlorEnLaEsquina)
+      tomarFlor
+      flores:=flores+1
+  fin
+  proceso JuntarP (ES papeles:numero)
+  comenzar
+    mientras (HayPapelEnLaEsquina)
+      tomarPapel
+      papeles:=papeles+1
+  fin
+  proceso Calle10F (ES flores:numero)
+  comenzar
+    mientras (flores<10)
+      JuntarF (flores)
+      mover
+    flores:=0
+  fin
+  proceso CallesImpares (ES flores:numero; E CaNum:numero)
+  comenzar
+    Pos(1,1)
+    derecha
+    repetir (49)
+      Calle10F (flores)
+      CaNum:=CaNum+2
+      Pos(1,CaNum)
+    Calle10F (flores)
+  fin
+  proceso Norte
+  comenzar
+    repetir (3)
+      derecha
+  fin
+  proceso RecorrerAvPap (ES PapelesT:numero; ES papeles:numero)
+  comenzar
+    repetir (99)
+      JuntarP (papeles)
+      mover
+    JuntarP (papeles)
+    PapelesT:=PapelesT+papeles
+  fin
+  proceso Av101112 (ES PapelesT:numero; E AvNum:numero; ES papeles:numero)
+  comenzar
+    Pos(AvNum,1)
+    repetir (2)
+      RecorrerAvPap (PapelesT,papeles)
+      AvNum:=AvNum+1
+      Pos(AvNum,1)
+    RecorrerAvPap (PapelesT,papeles)
+    Informar(PapelesT)
+  fin
+areas
+  ciudad:AreaC(1,1,100,100)
+robots
+  robot tuki
+  variables
+    flores,papeles,CaNum,AvNum,PapelesT:numero
+  comenzar
+    flores:=0
+    papeles:=0
+    CaNum:=1
+    AvNum:=10
+    PapelesT:=0
+    CallesImpares(flores,CaNum)
+    Norte
+    Av101112 (PapelesT,AvNum,papeles)
+  fin
+variables
+  R-info:tuki
+comenzar
+  AsignarArea(R-info,ciudad)
+  Iniciar(R-info,1,1)
+fin
+  
+    
+  

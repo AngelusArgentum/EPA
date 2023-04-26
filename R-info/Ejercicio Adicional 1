@@ -1,0 +1,63 @@
+{Recorrer todas las avenidas - recorrer c/u hasta esq vacia - si consegui 45 o mas flores informar}
+programa siu
+procesos
+  proceso RevEsq (ES vacia:boolean)
+  comenzar
+    si ~(HayFlorEnLaEsquina)& ~(HayPapelEnLaEsquina)
+      vacia:=V
+  fin
+  proceso JuntarFlores (ES flores:numero)
+  comenzar
+    mientras (HayFlorEnLaEsquina)
+      tomarFlor
+      flores:=flores+1
+  fin
+  proceso Avenida (ES AvNum:numero ; E vacia:boolean ; ES flores:numero)
+  comenzar
+    RevEsq (vacia)
+    mientras (vacia=F)
+      JuntarFlores (flores)
+      mover
+      RevEsq (vacia)
+    si (flores>=45)
+      Informar(flores)
+    flores:=0
+    AvNum:=AvNum+1
+    Pos (AvNum,1)
+  fin
+  proceso UltimaAv (E vacia:boolean; ES flores:numero)
+  comenzar
+    RevEsq(vacia)
+    mientras(vacia=F)
+      JuntarFlores (flores)
+      mover
+      RevEsq (vacia)
+    si (flores>=45)
+      Informar(flores)
+    flores:=0
+  fin
+  proceso AllAvs (ES AvNum:numero;E vacia:boolean;ES flores:numero)
+  comenzar
+    repetir (99)
+      Avenida (AvNum,vacia,flores)
+    UltimaAv (vacia,flores)
+  fin
+areas
+  ciudad:AreaC(1,1,100,100)
+robots
+  robot tuki
+  variables
+    AvNum,flores:numero
+    vacia:boolean
+  comenzar
+    AvNum:=1
+    flores:=0
+    vacia:=F
+    AllAvs (AvNum,vacia,flores)
+  fin
+variables
+  R-info: tuki
+comenzar
+  AsignarArea(R-info,ciudad)
+  Iniciar(R-info,1,1)
+fin

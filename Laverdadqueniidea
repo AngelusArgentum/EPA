@@ -1,0 +1,69 @@
+programa SIU
+procesos
+  proceso JuntarF (ES flores:numero;ES floresT:numero)
+  comenzar  
+    mientras (HayFlorEnLaEsquina)
+      tomarFlor
+      flores:=flores+1
+    floresT:=floresT+flores
+  fin
+  proceso JuntarP (ES papeles:numero; ES papelesT:numero)
+  comenzar
+    mientras (HayPapelEnLaEsquina)
+      tomarPapel
+      papeles:=papeles+1
+    papelesT:=papelesT+papeles
+  fin
+  proceso Cuadrado18 (ES flores:numero;ES floresT:numero;ES papeles:numero;ES papelesT:numero)
+  comenzar
+    Pos(1,1)
+    repetir (4)
+      repetir (18)
+        JuntarF (flores,floresT)
+        JuntarP (papeles,papelesT)
+        mover
+      derecha
+    Informar(flores,papeles)
+    flores:=0
+    papeles:=0
+  fin
+  proceso Cuadrado20 (ES flores:numero;ES floresT:numero;ES papeles:numero;ES papelesT:numero)
+  comenzar
+    Pos(30,30)
+    repetir (4)
+      repetir (20)
+        JuntarF (flores,floresT)
+        JuntarP (papeles,papelesT)
+        mover
+      derecha
+    Informar(flores,papeles)
+    flores:=0
+    papeles:=0
+  fin
+  proceso Calle70 (ES papeles:numero;ES papelesT:numero)
+  comenzar
+    Pos(1,70)
+    derecha
+    mientras (papeles<>papelesT)
+      mientras (HayPapelEnLaEsquina)
+        tomarPapel
+        papeles:=papeles+1
+      mover
+  fin
+areas
+  ciudad:AreaC(1,1,100,100)
+robots
+  robot tuki
+  variables
+    flores,floresT,papeles,papelesT:numero
+  comenzar
+    Cuadrado18 (flores,floresT,papeles,papelesT)
+    Cuadrado20 (flores,floresT,papeles,papelesT)
+    Calle70 (papeles,papelesT)
+  fin
+variables
+  R-info:tuki
+comenzar
+  AsignarArea(R-info,ciudad)
+  Iniciar(R-info,1,1)
+fin

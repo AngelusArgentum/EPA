@@ -1,0 +1,50 @@
+programa siu
+procesos
+  proceso RevEsq (E vacia:boolean)
+  comenzar
+    si ~(HayFlorEnLaEsquina)& ~(HayPapelEnLaEsquina)
+      vacia:=V
+  fin
+  proceso JuntarFlores (ES flores:numero)
+  comenzar
+    mientras (HayFlorEnLaEsquina)
+      tomarFlor
+      flores:=flores+1
+  fin
+  proceso Avenida (E AvNum:numero ; E vacia:boolean ; ES flores:numero)
+  comenzar
+    Pos (AvNum,1)
+    RevEsq (vacia)
+    mientras (vacia=F)
+      JuntarFlores (flores)
+      mover
+      RevEsq (vacia)
+    Si (flores>=45)
+      Informar(flores)
+    flores:=0
+    AvNum:=AvNum+1
+  fin
+  proceso AllAvs (E AvNum:numero;E vacia:boolean;ES flores:numero)
+  comenzar
+    Repetir (99)
+      Avenida (AvNum,vacia,flores)
+  fin
+areas
+  ciudad:AreaC(1,1,100,100)
+robots
+  robot tuki
+  variables
+    AvNum,flores:numero
+    vacia:boolean
+  comenzar
+    AvNum:=1
+    flores:=0
+    vacia:=F
+    AllAvs (AvNum,vacia,flores)
+  fin
+variables
+  R-info: tuki
+comenzar
+  AsignarArea(R-info,ciudad)
+  Iníciar(R-info,1,1)
+fin
